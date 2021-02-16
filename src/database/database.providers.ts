@@ -15,7 +15,7 @@ export const databaseProviders = [
     useFactory: async (configService: ConfigService): Promise<Sequelize> => {
       const sequelize = new Sequelize(configService.sequelizeOrmConfig);
       sequelize.addModels([...Entities, ...ManyToManyEntities]);
-      await sequelize.sync({ force: true });
+      await sequelize.sync({ alter: true });
       return sequelize;
     },
     inject: [ConfigService],

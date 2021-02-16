@@ -19,6 +19,6 @@ export class RoomEntity extends Model<any> {
   @Column({ ...NOT_NULL, type: DataType.STRING })
   public type: string;
 
-  @Column({ ...NOT_NULL, type: DataType.STRING })
-  public price: string;
+  @Column({ ...NOT_NULL, type: DataType.DECIMAL })
+  public price: number;
 }

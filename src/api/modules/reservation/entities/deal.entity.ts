@@ -1,6 +1,7 @@
 import { DealStatusEnum } from '../enum/deal-status.enum';
 import { ClientEntity } from 'src/api/modules/clients';
 import {
+  AutoIncrement,
   BelongsTo,
   Column,
   DataType,
@@ -10,16 +11,14 @@ import {
   Table,
 } from 'sequelize-typescript';
 
-import { NOT_NULL } from 'src/api/shared/constants';
-import { DealEntityModel } from '../models';
 import { RoomEntity } from '../../rooms/entities';
 
 @Table({ modelName: 'deals' })
-export class DealEntity extends Model<any>
-  implements DealEntityModel {
+export class DealEntity extends Model<any> {
   @PrimaryKey
-  @Column({ ...NOT_NULL, type: DataType.UUID })
-  public dealId: string;
+  @AutoIncrement
+  @Column({ type: DataType.INTEGER })
+  public dealId: number;
 
   @Column({type: DataType.UUID})
   @ForeignKey(() => ClientEntity)
@@ -31,6 +30,9 @@ export class DealEntity extends Model<any>
 
   @BelongsTo(() => ClientEntity)
   public client: ClientEntity;
+  
+  @BelongsTo(() => RoomEntity)
+  public room: RoomEntity;
 
   @Column({type: DataType.DATE})
   public reservationDate: Date;

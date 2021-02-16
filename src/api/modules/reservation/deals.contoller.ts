@@ -1,10 +1,14 @@
 import {
 
+  Body,
   Controller,
   Get,
+  Post,
 
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiTags } from '@nestjs/swagger';
+import { DealDTO } from './dto';
+import { DealEntity } from './entities';
 
 import { DealsService } from './services';
 
@@ -26,11 +30,11 @@ export class DealsController {
   //   return this._dealsService.getOneById(dealId);
   // }
 
-  // @Post('createOne')
-  // @ApiBody({ type: DealDTO })
-  // public async createOne(@Body() newDeal: DealDTO): Promise<DealEntity> {
-  //   return await this._dealsService.createOne(newDeal);
-  // }
+  @Post()
+  @ApiBody({ type: DealDTO })
+  public async createOne(@Body() newDeal: DealDTO): Promise<DealEntity> {
+    return await this._dealsService.createOne(newDeal);
+  }
 
   // @Put('updateOne')
   // @ApiBody({ type: DealUpdateDTO })

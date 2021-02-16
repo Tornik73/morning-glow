@@ -5,9 +5,10 @@ import { DealsController } from './deals.contoller';
 import { DealsRepository } from './repositories';
 import { dealsProviders } from './providers';
 import { ClientsModule } from '../clients/cleints.module';
+import { RoomsModule } from '../rooms/rooms.module';
 
 @Module({
-  imports: [ClientsModule],
+  imports: [ClientsModule, RoomsModule],
   controllers: [DealsController],
   providers: [DealsService, DealsRepository, ...dealsProviders],
 })

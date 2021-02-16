@@ -17,9 +17,8 @@ import {
   mEnum,
   TransportEnum,
 } from '../enum';
-import { DealDTO } from './deal.dto';
 
-export class DealUpdateDTO implements DealDTO {
+export class DealUpdateDTO {
   @IsUUID()
   @IsOptional()
   @ApiProperty({ required: false })

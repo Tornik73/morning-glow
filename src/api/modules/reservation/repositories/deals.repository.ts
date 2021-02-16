@@ -9,6 +9,7 @@ import { DealsProvidersEnum } from '../enum';
 import { DealEntityModel } from '../models';
 import { EXCLUDE_TIME_STAMPS } from 'src/api/shared';
 import { DealDTO } from '../dto';
+import { RoomEntity } from '../../rooms/entities';
 
 @Injectable()
 export class DealsRepository {
@@ -17,11 +18,17 @@ export class DealsRepository {
     private readonly _dealsRepository: typeof DealEntity,
     @Inject(ClientsProvidersEnum.CLIENTS_REPOSITORY)
     private readonly _clientRepository: typeof ClientEntity,
+    @Inject('ROOMS_REPOSITORY')
+    private readonly _roomRepository: typeof RoomEntity,
   ) {}
 
   private readonly _clientsAccountsRepositories = [
     {
       model: this._clientRepository,
+      attributes: EXCLUDE_TIME_STAMPS,
+    },
+    {
+      model: this._roomRepository,
       attributes: EXCLUDE_TIME_STAMPS,
     },
   ];
@@ -44,23 +51,6 @@ export class DealsRepository {
     return from(
       this._dealsRepository.findOne({
         where: options as WhereOptions,
-        include: this._clientsAccountsRepositories,
-      }),
-    );
-  }
-
-  public getAll(
-    limit: number,
-    offset: number,
-  ): Observable<{
-    count: number;
-    rows: DealEntity[];
-  }> {
-    return from(
-      this._dealsRepository.findAndCountAll({
-        offset,
-        limit,
-        distinct: true,
         include: this._clientsAccountsRepositories,
       }),
     );

@@ -40,8 +40,8 @@ export class DealsService {
   public async createOne(newDeal: DealDTO): Promise<DealEntity> {
     const dealEntity: Partial<DealEntityModel> = {
       ...newDeal,
-      dealId: uuidv4(),
     };
+    console.log(newDeal)
     return await this._dealsRepository.createOne(dealEntity);
   }
 }

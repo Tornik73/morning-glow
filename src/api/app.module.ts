@@ -7,6 +7,7 @@ import { MulterModule } from '@nestjs/platform-express';
 import { SharedModule } from './shared/shared.module';
 import { DatabaseModule } from '../database';
 import { RoomsModule } from './modules/rooms/rooms.module';
+import { ReservationsModule } from './modules/reservation/deals.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { RoomsModule } from './modules/rooms/rooms.module';
     ClientsModule,
     RoomsModule,
     DatabaseModule,
+    ReservationsModule,
     ConfigModule.forRoot(),
     MulterModule.register({
       dest: './uploaded-files',
